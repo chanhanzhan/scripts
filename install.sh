@@ -70,8 +70,8 @@ pre_check() {
     fi
 
     # 设置固定的下载源
-    GITHUB_RAW_URL="shell.cdnfly.us.kg/data"
-    GITHUB_URL="shell.cdnfly.us.kg/data"
+    GITHUB_RAW_URL="https://shell.cdnfly.us.kg/data"
+    GITHUB_URL="https://shell.cdnfly.us.kg/data"
 }
 
 installation_check() {
@@ -621,8 +621,8 @@ show_usage() {
 
 show_menu() {
     printf "
-    ${green}哪吒监控管理脚本 (简化版)${plain}
-    --- https://shell.cdnfly.us.kg/data/ ---
+    ${green}哪吒监控管理脚本 ${plain}
+    ${green}———————————————${plain}
     ${green}1.${plain}  安装面板端
     ${green}2.${plain}  修改面板配置
     ${green}3.${plain}  启动面板
