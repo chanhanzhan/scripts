@@ -245,7 +245,7 @@ install_agent() {
     sudo mkdir -p $NZ_AGENT_PATH
 
     echo "正在下载监控端"
-    NZ_AGENT_URL="https://${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
+    NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
 
     _cmd="wget -t 2 -T 60 -O nezha-agent_linux_${os_arch}.zip $NZ_AGENT_URL >/dev/null 2>&1"
     if ! eval "$_cmd"; then
@@ -429,7 +429,7 @@ restart_and_update_standalone() {
         sudo rc-service nezha-dashboard stop
     fi
 
-    NZ_DASHBOARD_URL="https://${GITHUB_URL}/dashboard-linux-${os_arch}.zip"
+    NZ_DASHBOARD_URL="${GITHUB_URL}/dashboard-linux-${os_arch}.zip"
 
     sudo wget -qO $NZ_DASHBOARD_PATH/app.zip "$NZ_DASHBOARD_URL" >/dev/null 2>&1 && sudo unzip -qq -o $NZ_DASHBOARD_PATH/app.zip -d $NZ_DASHBOARD_PATH && sudo mv $NZ_DASHBOARD_PATH/dashboard-linux-$os_arch $NZ_DASHBOARD_PATH/app && sudo rm $NZ_DASHBOARD_PATH/app.zip
     sudo chmod +x $NZ_DASHBOARD_PATH/app
