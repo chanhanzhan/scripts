@@ -244,7 +244,7 @@ install_agent() {
     # Nezha Monitoring Folder
     sudo mkdir -p $NZ_AGENT_PATH
 
-    echo "正在下载监控端 : $NZ_AGENT_URL"
+    echo "正在下载监控端 "
     NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
 
     _cmd="wget -t 2 -T 60 -O nezha-agent_linux_${os_arch}.zip $NZ_AGENT_URL >/dev/null 2>&1"
