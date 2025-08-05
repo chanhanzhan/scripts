@@ -233,40 +233,49 @@ selinux() {
     fi
 }
 
-install_agent() {
-    install_base
-    selinux
+install_agent() {  
+    install_base  
+    selinux  
+  
+    echo "> 安装监控Agent"  
+  
+    _version="v0.20.5"  
 
-    echo "> 安装监控Agent"
+    # Nezha Monitoring Folder  
+    sudo mkdir -p $NZ_AGENT_PATH  
 
-    _version="v0.20.5"
+    echo "正在下载监控端 "  
 
-    # Nezha Monitoring Folder
-    sudo mkdir -p $NZ_AGENT_PATH
-
-    echo "正在下载监控端 "
-    NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
-
-    _cmd="wget -t 2 -T 60 -O nezha-agent_linux_${os_arch}.zip $NZ_AGENT_URL >/dev/null 2>&1"
-    if ! eval "$_cmd"; then
-        err "Release 下载失败，请检查本机能否连接 ${GITHUB_URL}"
-        return 1
-    fi
-
-    sudo unzip -qo nezha-agent_linux_${os_arch}.zip &&
-        sudo mv nezha-agent $NZ_AGENT_PATH &&
-        sudo rm -rf nezha-agent_linux_${os_arch}.zip README.md
-
-    if [ $# -ge 3 ]; then
-        modify_agent_config "$@"
+    # Check if GitHub URL is accessible
+    TEST_URL="${GITHUB_URL}/test"
+    if ! curl --head --silent --fail "$TEST_URL" > /dev/null; then
+        echo "GitHub URL 无法访问，使用备用源"
+        NZ_AGENT_URL="https://edgeone.cdnfly.us.kg/nezha-agent_linux_${os_arch}.zip"
     else
-        modify_agent_config 0
+        NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
     fi
-
-    if [ $# = 0 ]; then
-        before_show_menu
-    fi
+  
+    _cmd="wget -t 2 -T 60 -O nezha-agent_linux_${os_arch}.zip $NZ_AGENT_URL >/dev/null 2>&1"  
+    if ! eval "$_cmd"; then  
+        err "Release 下载失败，请检查本机能否连接 ${NZ_AGENT_URL}"  
+        return 1  
+    fi  
+  
+    sudo unzip -qo nezha-agent_linux_${os_arch}.zip &&  
+        sudo mv nezha-agent $NZ_AGENT_PATH &&  
+        sudo rm -rf nezha-agent_linux_${os_arch}.zip README.md  
+  
+    if [ $# -ge 3 ]; then  
+        modify_agent_config "$@"  
+    else  
+        modify_agent_config 0  
+    fi  
+  
+    if [ $# = 0 ]; then  
+        before_show_menu  
+    fi  
 }
+
 
 modify_agent_config() {
     echo "> 修改 Agent 配置"
