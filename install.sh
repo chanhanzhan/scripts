@@ -250,7 +250,7 @@ install_agent() {
     TEST_URL="${GITHUB_URL}/test"
     if ! curl --head --silent --fail "$TEST_URL" > /dev/null; then
         echo "GitHub URL 无法访问，使用备用源"
-        NZ_AGENT_URL="https://edgeone.cdnfly.us.kg/nezha-agent_linux_${os_arch}.zip"
+        NZ_AGENT_URL="https://edge.cdnfly.us.kg/nezha-agent_linux_${os_arch}.zip"
     else
         NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
     fi
