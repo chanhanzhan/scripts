@@ -70,8 +70,8 @@ pre_check() {
     fi
 
     # 设置固定的下载源
-    GITHUB_RAW_URL="https://shell.cdnfly.us.kg/data"
-    GITHUB_URL="https://shell.cdnfly.us.kg/data"
+    GITHUB_RAW_URL="https://edge.cdnfly.us.kg/data"
+    GITHUB_URL="https://edge.cdnfly.us.kg/data"
 }
 
 installation_check() {
@@ -87,7 +87,7 @@ installation_check() {
 update_script() {
     echo "> 更新脚本"
 
-    curl -sL https://deno-53-72-yka0q4ctjhmv.deno.dev/https://${GITHUB_RAW_URL}/install.sh -o /tmp/nezha.sh
+    curl -sL https://${GITHUB_RAW_URL}/install.sh -o /tmp/nezha.sh
     mv -f /tmp/nezha.sh ./nezha.sh && chmod a+x ./nezha.sh
 
     echo "3s后执行新脚本"
@@ -250,7 +250,7 @@ install_agent() {
     TEST_URL="${GITHUB_URL}/test"
     if ! curl --head --silent --fail "$TEST_URL" > /dev/null; then
         echo "GitHub URL 无法访问，使用备用源"
-        NZ_AGENT_URL="https://edge.cdnfly.us.kg/nezha-agent_linux_${os_arch}.zip"
+        NZ_AGENT_URL="https://shell.cdnfly.us.kg/nezha-agent_linux_${os_arch}.zip"
     else
         NZ_AGENT_URL="${GITHUB_URL}/nezha-agent_linux_${os_arch}.zip"
     fi
